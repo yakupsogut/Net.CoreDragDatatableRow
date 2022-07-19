@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+  
+<div class="text-center">
+    <h1 class="display-4">Net.Core Table rows drag and drop application</h1>
+</div>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Full row selection</h5>
+    </div>
+
+
+
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Full Name</th>
+                <th>Job Title</th>
+                <th>DOB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><a href="#">Marth Enright</a></td>
+                <td>Traffic Court Referee</td>
+                <td>22 Jun 1972</td>
+           
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jackelyn Weible</td>
+                <td><a href="#">Airline Transport Pilot</a></td>
+                <td>3 Oct 1981</td>
+             
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Aura Hard</td>
+                <td>Business Services Sales Representative</td>
+                <td>19 Apr 1969</td>
+            
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><a href="#">Nathalie Pretty</a></td>
+                <td>Drywall Stripper</td>
+                <td>13 Dec 1977</td>
+         
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Sharan Leland</td>
+                <td>Aviation Tactical Readiness Officer</td>
+                <td>30 Dec 1991</td>
+             
+              
+            </tr>
+          
+        </tbody>
+    </table>
+
+
+
+</div>
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable( {
+        rowReorder: {
+            selector: 'tr'
+        },
+        columnDefs: [
+            { targets: 0, visible: true }
+        ],
+        filter:false,
+        paging: false,
+        info:false
+    } );
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+}

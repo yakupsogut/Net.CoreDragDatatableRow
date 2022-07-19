@@ -1,0 +1,90 @@
+﻿<!-- Full row selection -->
+<form asp-controller="Home" asp-action="DragTableRowsPostExample">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Add Row Card</h5>
+        </div>
+        <div class="card-body">
+            <input type="text" id="text" />
+            <button type="button" onclick="addRow()">Add Row</button>
+        </div>
+
+
+        <table id="myTable" class="table">
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Full Name</th>
+                </tr>
+            </thead>
+            <tbody id="trbody">
+            </tbody>
+        </table>
+        <div class="card-footer">
+            <button type="submit">Submit</button>
+
+        </div>
+
+
+    </div>
+</form>
+<!-- /full row selection -->
+@section Scripts {
+
+<script>
+        var count=0;
+        function addRow(){
+            var txt=$('#text').val();
+            count++;
+
+            var tr=`<tr>
+                    <td><input name="order"  value="${count}" hidden="hidden"/>${count}</td>
+                    <td><input name="fullName" type="text" value="${txt}"/></td>
+
+                    </tr>`;
+            $('#trbody').append(tr);
+            $('#text').val('');
+            dataTableRefresh();
+
+        }
+        function dataTableRefresh(){
+             var s=$('#myTable').html();
+             $('#myTable').empty();
+              $('#myTable').append(s);
+               $('#myTable').DataTable().destroy();
+
+
+                $('#myTable').DataTable( {
+                rowReorder: {
+                    selector: 'tr'
+                },
+                columnDefs: [
+                    { targets: 0, visible: true }
+                ],
+                filter:false,
+                paging: false,
+                info:false
+            } );
+        }
+
+        $(document).ready(function() {
+             var someTableDT = $("#myTable").on("draw.dt", function () {
+        $(this).find(".dataTables_empty").parents('tbody tr').remove();
+    }).DataTable( {
+                rowReorder: {
+                    selector: 'tr'
+                },
+                columnDefs: [
+                    { targets: 0, visible: true }
+                ],
+                filter:false,
+                paging: false,
+                info:false
+            } );
+        });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+}
